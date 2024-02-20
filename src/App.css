@@ -6,22 +6,52 @@ body {
   color: #fff;
 }
 
+h1 {
+  text-align: left;
+  font-size: 2em;
+  padding-left: 8vh;
+}
+
 .target-text-container {
   text-align: center;
+  position: relative;
+  max-width: max-content;
+  margin: 0 auto;
+}
+
+.word {
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 10vh;
+  z-index: 0; 
+  text-align: center;
+  margin: 10vh;
+  font-size: 4em;
+  max-width: 20em;
+  word-wrap: break-word;
+}
+
+.placeholder {
+  top: 0;
+  left: 0;
+  color: #888;
+  pointer-events: none;
 }
 
 .target-text-input {
-  padding: 10vh;
+  top: 10vh;
   text-align: center;
   margin: 10vh;
-  font-size: 2em;
   background-color: transparent;
   border: none;
   font-size: 4em;
   border: 1px solid #ccc;
-  border-radius: 6px;
   outline: none;
-  color: #f5f5f5;
+  color: transparent;
+  position: relative; 
+  z-index: 1; 
+  width: 20em;
+  word-wrap: break-word;
 }
 
 .target-text-input:focus {
@@ -33,5 +63,10 @@ body {
   
 }
 
+.letra-correcta {
+  color: #00a0d1;
+}
 
-
+.letra-incorrecta {
+  color: #ff0000;
+}
