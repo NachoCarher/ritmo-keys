@@ -14,19 +14,15 @@ h1 {
 
 .target-text-container {
   text-align: center;
-  position: relative;
   max-width: max-content;
   margin: 0 auto;
 }
 
 .word {
   border: 1px solid #ccc;
-  position: absolute;
-  top: 10vh;
   z-index: 0; 
   text-align: center;
-  margin: 10vh;
-  font-size: 4em;
+  font-size: 3.4em;
   max-width: 20em;
   word-wrap: break-word;
 }
@@ -39,28 +35,16 @@ h1 {
 }
 
 .target-text-input {
-  top: 10vh;
-  text-align: center;
-  margin: 10vh;
-  background-color: transparent;
-  border: none;
-  font-size: 4em;
-  border: 1px solid #ccc;
-  outline: none;
-  color: transparent;
-  position: relative; 
-  z-index: 1; 
-  width: 20em;
-  word-wrap: break-word;
+  position: absolute;
+  left: -9999px; 
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
 }
 
 .target-text-input:focus {
   border-color: #00a0d1;
   transition: 0.5s;
-}
-
-.target-text-input::placeholder {
-  
 }
 
 .letra-correcta {
