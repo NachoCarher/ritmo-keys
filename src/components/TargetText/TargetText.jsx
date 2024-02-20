@@ -3,22 +3,23 @@ import mock from "../../mocks/text1.json";
 import { useState } from "react";
 
 export default function TargetText() {
-    const palabraObjetivo = mock.exampleText;
+    const textoObjetivo = mock.exampleText;
     const [letrasIngresadas, setLetrasIngresadas] = useState([]);
+    const [textoPlaceholder, setTextoPlaceholder] = useState(textoObjetivo);
 
     const manejarCambioInput = (event) => {
         const valorInput = event.target.value;
         const letras = valorInput.split('');
     
         const inputConEstilo = letras.map((letra, index) => {
-          const letraObjetivo = palabraObjetivo[index];
+          const letraObjetivo = textoObjetivo[index];
           const esCorrecta = letra === letraObjetivo;
     
           return <span key={index} className={esCorrecta ? 'letra-correcta' : 'letra-incorrecta'}>{letra}</span>;
         });
     
         setLetrasIngresadas(inputConEstilo);
-        //console.log(inputConEstilo);
+        setTextoPlaceholder(textoObjetivo.slice(letras.length));
       };
 
     // El input debe mantener el foco siempre
@@ -28,10 +29,9 @@ export default function TargetText() {
 
     return (
         <div className="target-text-container">
-            {/* <p>{palabraObjetivo}</p> */}
-            <input type="text" className="target-text-input" autoFocus onChange={manejarCambioInput} onBlur={manejarBlurInput} />
+            <input type="text" spellCheck="false" className="target-text-input" autoFocus onChange={manejarCambioInput} onBlur={manejarBlurInput} />
             <p className="word">{letrasIngresadas}
-              <span className="placeholder">{palabraObjetivo}</span>
+              <span className="placeholder">{textoPlaceholder}</span>
             </p>
         </div>
         
