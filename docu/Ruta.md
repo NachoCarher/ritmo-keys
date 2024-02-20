@@ -13,7 +13,7 @@
 2. **Estructura de Carpetas**: Organiza tu proyecto en carpetas lógicas como `components`, `styles`, `utils`, etc.
 3. **Crea Componentes Básicos**: Diseña componentes básicos como el área de escritura, la palabra objetivo y el temporizador.
 
-### Nivel 2: Gestión de Palabras
+### Nivel 2: Gestión de Palabras ✅
 1. **Genera una Lista de Palabras**: Crea una lista de palabras o frases para que el usuario las escriba. Puedes usar un archivo JSON o un array en tu código.
 2. **Mostrar Palabra Objetivo**: Implementa la lógica para mostrar una palabra aleatoria al usuario.
 3. **Validación de Entrada**: Verifica si la palabra escrita por el usuario coincide con la palabra objetivo.
