@@ -1,6 +1,7 @@
 import "./App.css";
 import "./components/TargetText/TargetText.jsx";
 import TargetText from "./components/TargetText/TargetText.jsx";
+import Timer from "./components/Timer/Timer.jsx";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
         <h1>ritmokeys</h1>
       </header>
       <main>
+        <Timer />
         <TargetText />
       </main>
     </div>
