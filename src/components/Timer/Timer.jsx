@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
-export default function Timer({ startTimer }) {
+export default function Timer({ startTimer, stopTimer }) {
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
     const [milliseconds, setMilliseconds] = useState(0);
 
     useEffect(() => {
-        if (!startTimer) {
+        if (!startTimer && !stopTimer) {
             setMinutes(0);
             setSeconds(0);
             setMilliseconds(0);
         }
-        else {
+        else if (startTimer && !stopTimer){
             const interval = setInterval(() => {
                 setMilliseconds(milliseconds => milliseconds + 1);
             }, 10);
@@ -29,11 +29,14 @@ export default function Timer({ startTimer }) {
             
             return () => clearInterval(interval);
         }
-    }, [milliseconds, seconds, startTimer]);
+        else if (stopTimer) {
+            clearInterval();
+        }
+    }, [milliseconds, seconds, startTimer, stopTimer]);
 
     const time = `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}:${milliseconds < 10 ? `0${milliseconds}` : milliseconds}`;
     
     return (
-    <div className="timer">{time}</div>
+    <div className={(!startTimer || stopTimer) ? 'timer-stopped' : 'timer-started'}>{time}</div>
     );
 }

@@ -3,7 +3,7 @@ import mock from "../../mocks/text1.json";
 import { useState } from "react";
 import TextoIngresado from '../TextoIngresado/TextoIngresado';
 
-export default function TargetText({ onInputStarted }) {
+export default function TargetText({ onInputStarted, textFinished }) {
   const textoObjetivo = mock.exampleText;
   const [textoIngresado, setTextoIngresado] = useState('');
 
@@ -14,6 +14,10 @@ export default function TargetText({ onInputStarted }) {
 
   const manejarBlurInput = (event) => {
     event.target.focus();
+  }
+
+  if (textoIngresado.length === textoObjetivo.length) {
+    textFinished();
   }
 
   return (

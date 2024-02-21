@@ -6,9 +6,14 @@ import { useState } from "react";
 
 export default function App() {
   const [isWriting, setIsWriting] = useState(false);
+  const [textFinished, setTextFinished] = useState(false);
 
   const handleIsWriting = () => {
     setIsWriting(true);
+  }
+
+  const handleTextFinished = () => {
+    setTextFinished(true);
   }
 
   return (
@@ -17,8 +22,8 @@ export default function App() {
         <h1>ritmokeys</h1>
       </header>
       <main>
-        <Timer startTimer={isWriting}/>
-        <TargetText onInputStarted={handleIsWriting}/>
+        <Timer startTimer={isWriting} stopTimer={textFinished}/>
+        <TargetText onInputStarted={handleIsWriting} textFinished={handleTextFinished}/>
       </main>
     </div>
   )
