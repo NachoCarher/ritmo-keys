@@ -3,11 +3,12 @@ import mock from "../../mocks/text1.json";
 import { useState } from "react";
 import TextoIngresado from '../TextoIngresado/TextoIngresado';
 
-export default function TargetText() {
+export default function TargetText({ onInputStarted }) {
   const textoObjetivo = mock.exampleText;
   const [textoIngresado, setTextoIngresado] = useState('');
 
   const manejarCambioInput = (event) => {
+    onInputStarted();
     setTextoIngresado(event.target.value);
   };
 
