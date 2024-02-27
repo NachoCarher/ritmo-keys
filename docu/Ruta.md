@@ -18,7 +18,7 @@
 2. **Mostrar Palabra Objetivo**: Implementa la lógica para mostrar una palabra aleatoria al usuario.
 3. **Validación de Entrada**: Verifica si la palabra escrita por el usuario coincide con la palabra objetivo.
 
-### Nivel 3: Control del Tiempo
+### Nivel 3: Control del Tiempo ✅
 1. **Temporizador**: Agrega un temporizador que comience a contar cuando se muestra la primera palabra. Utiliza **useState** para manejar el tiempo restante.
 2. **Finalización del Juego**: Detén el juego cuando se acabe el tiempo o cuando el usuario haya escrito todas las palabras.
 

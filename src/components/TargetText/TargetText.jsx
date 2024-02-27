@@ -6,6 +6,7 @@ import TextoIngresado from '../TextoIngresado/TextoIngresado';
 export default function TargetText({ onInputStarted, textFinished }) {
   const textoObjetivo = mock.exampleText;
   const [textoIngresado, setTextoIngresado] = useState('');
+  const palabrasIngresadas = textoIngresado.split(' ');
 
   const manejarCambioInput = (event) => {
     onInputStarted();
@@ -17,8 +18,12 @@ export default function TargetText({ onInputStarted, textFinished }) {
   }
 
   if (textoIngresado.length === textoObjetivo.length) {
-    textFinished();
+    textFinished(); 
   }
+
+  const palabrasCorrectas = palabrasIngresadas.filter((palabra, index) => {
+    return palabra === textoObjetivo.split(' ')[index];
+  });
 
   return (
     <div className="target-text-container">
@@ -27,6 +32,7 @@ export default function TargetText({ onInputStarted, textFinished }) {
         <TextoIngresado textoIngresado={textoIngresado} textoObjetivo={textoObjetivo} />
         <span className="placeholder">{textoObjetivo.slice(textoIngresado.length)}</span>
       </p>
+      <p className="word-counter">{palabrasCorrectas.length} / {textoObjetivo.split(' ').length} palabras correctas</p>
     </div>
   )
 }
