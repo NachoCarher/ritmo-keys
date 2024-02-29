@@ -3,6 +3,7 @@ import "./components/TargetText/TargetText.jsx";
 import TargetText from "./components/TargetText/TargetText.jsx";
 import Timer from "./components/Timer/Timer.jsx";
 import { useState } from "react";
+import confetti from "canvas-confetti";
 
 export default function App() {
   const [isWriting, setIsWriting] = useState(false);
@@ -14,6 +15,7 @@ export default function App() {
 
   const handleTextFinished = () => {
     setTextFinished(true);
+    confetti();
   }
 
   return (

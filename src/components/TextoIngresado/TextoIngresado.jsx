@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line react/prop-types
 function Letra({ letra, esCorrecta }) {
     return <span className={esCorrecta ? 'letra-correcta' : 'letra-incorrecta'}>{letra}</span>;
