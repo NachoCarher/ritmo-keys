@@ -2,18 +2,19 @@
 //import mock from "../../mocks/text1.json";
 import { useState, useEffect } from "react";
 import TextoIngresado from '../TextoIngresado/TextoIngresado';
+import {useHttp} from '../../hooks/useHttp';
 
 export default function TargetText({ onInputStarted, textFinished }) {
   const [textoIngresado, setTextoIngresado] = useState('');
   const palabrasIngresadas = textoIngresado.split(' ');
   const [textoObjetivo, setTexto] = useState("");
+  const { data, isLoading, error } = useHttp({ url: 'https://clientes.api.greenborn.com.ar/public-random-word?c=10' });
 
   useEffect(() => {
-    fetch('https://clientes.api.greenborn.com.ar/public-random-word?c=10')
-    .then(response => response.json())
-    .then(data => setTexto(removeCommas(data.toString())))
-    .catch(error => console.log(error));
-  }, []);
+    if (data) {
+      setTexto(removeCommas(data.toString()));
+    }
+  }, [data]);
 
   function removeCommas(texto) {
     return texto.replace(/,/g, ' ');
@@ -43,9 +44,9 @@ export default function TargetText({ onInputStarted, textFinished }) {
       <p className="word">
         <TextoIngresado textoIngresado={textoIngresado} textoObjetivo={textoObjetivo} />
         <span className="placeholder">
-          {
-            textoObjetivo === "" ? "Cargando..." : textoObjetivo.slice(textoIngresado.length)
-          }
+          { isLoading && "Cargando..." }
+          { error && "Error al cargar el texto" }
+          { data && textoObjetivo.slice(textoIngresado.length) }
           </span>
       </p>
       <p className="word-counter">{palabrasCorrectas.length} / {textoObjetivo.split(' ').length} palabras correctas</p>
