@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import TextoIngresado from '../TextoIngresado/TextoIngresado';
 
 export default function TargetText({ onInputStarted, textFinished }) {
-  //let textoObjetivo = "hola colega";
   const [textoIngresado, setTextoIngresado] = useState('');
   const palabrasIngresadas = textoIngresado.split(' ');
   const [textoObjetivo, setTexto] = useState("");
@@ -14,9 +13,6 @@ export default function TargetText({ onInputStarted, textFinished }) {
     .then(response => response.json())
     .then(data => setTexto(removeCommas(data.toString())))
     .catch(error => console.log(error));
-
-    console.log(textoObjetivo);
-
   }, []);
 
   function removeCommas(texto) {
@@ -46,7 +42,11 @@ export default function TargetText({ onInputStarted, textFinished }) {
       <input type="text" spellCheck="false" className="target-text-input" autoFocus onChange={manejarCambioInput} onBlur={manejarBlurInput} />
       <p className="word">
         <TextoIngresado textoIngresado={textoIngresado} textoObjetivo={textoObjetivo} />
-        <span className="placeholder">{textoObjetivo.slice(textoIngresado.length)}</span>
+        <span className="placeholder">
+          {
+            textoObjetivo === "" ? "Cargando..." : textoObjetivo.slice(textoIngresado.length)
+          }
+          </span>
       </p>
       <p className="word-counter">{palabrasCorrectas.length} / {textoObjetivo.split(' ').length} palabras correctas</p>
     </div>
