@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
-import mock from "../../mocks/text1.json";
+//import mock from "../../mocks/text1.json";
 import { useState, useEffect } from "react";
 import TextoIngresado from '../TextoIngresado/TextoIngresado';
-
-
 
 export default function TargetText({ onInputStarted, textFinished }) {
   //let textoObjetivo = "hola colega";
@@ -11,16 +9,19 @@ export default function TargetText({ onInputStarted, textFinished }) {
   const palabrasIngresadas = textoIngresado.split(' ');
   const [textoObjetivo, setTexto] = useState("");
 
-useEffect(() => {
-  fetch('https://clientes.api.greenborn.com.ar/public-random-word?c=10')
-  .then(response => response.json())
-  .then(data => setTexto(data.toString()))
-  .catch(error => console.log(error));
+  useEffect(() => {
+    fetch('https://clientes.api.greenborn.com.ar/public-random-word?c=10')
+    .then(response => response.json())
+    .then(data => setTexto(removeCommas(data.toString())))
+    .catch(error => console.log(error));
 
-  // reemplazar comas por espacios de texto objetivo
-  console.log(textoObjetivo);
+    console.log(textoObjetivo);
 
-}, []);
+  }, []);
+
+  function removeCommas(texto) {
+    return texto.replace(/,/g, ' ');
+  }
 
   const manejarCambioInput = (event) => {
     onInputStarted();
@@ -31,14 +32,14 @@ useEffect(() => {
     event.target.focus();
   }
 
-  if (textoIngresado.length === textoObjetivo.length) {
-    textFinished(); 
-  }
-
   // sacar en otro componente las palabras correctas
   const palabrasCorrectas = palabrasIngresadas.filter((palabra, index) => {
-    return palabra === textoObjetivo.split(',')[index];
+    return palabra === textoObjetivo.split(' ')[index];
   });
+
+  if ((textoObjetivo != "") && (textoIngresado.length === textoObjetivo.length)) {
+    textFinished(); 
+  }
 
   return (
     <div className="target-text-container">
@@ -47,7 +48,7 @@ useEffect(() => {
         <TextoIngresado textoIngresado={textoIngresado} textoObjetivo={textoObjetivo} />
         <span className="placeholder">{textoObjetivo.slice(textoIngresado.length)}</span>
       </p>
-      <p className="word-counter">{palabrasCorrectas.length} / {textoObjetivo.split(',').length} palabras correctas</p>
+      <p className="word-counter">{palabrasCorrectas.length} / {textoObjetivo.split(' ').length} palabras correctas</p>
     </div>
   )
 }
