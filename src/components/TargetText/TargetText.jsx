@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import TextoIngresado from '../TextoIngresado/TextoIngresado';
 import {useHttp} from '../../hooks/useHttp';
 
-export default function TargetText({ onInputStarted, textFinished }) {
+export default function TargetText({ onInputStarted, textFinished, correctWords, totalWords}) {
   const [textoIngresado, setTextoIngresado] = useState('');
   const palabrasIngresadas = textoIngresado.split(' ');
   const [textoObjetivo, setTexto] = useState("");
@@ -34,9 +34,13 @@ export default function TargetText({ onInputStarted, textFinished }) {
     return palabra === textoObjetivo.split(' ')[index];
   });
 
-  if ((textoObjetivo != "") && (textoIngresado.length === textoObjetivo.length)) {
-    textFinished(); 
-  }
+  useEffect(() => {
+    if ((textoObjetivo !== "") && (textoIngresado.length === textoObjetivo.length)) {
+      textFinished(true);
+      correctWords(palabrasCorrectas.length);
+      totalWords(textoObjetivo.split(' ').length);
+    }
+  }, [textoIngresado, textoObjetivo]);
 
   return (
     <div className="target-text-container">

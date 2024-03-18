@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
-export default function Timer({ startTimer, stopTimer }) {
+export default function Timer({ startTimer, stopTimer, timeEnded }) {
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
     const [milliseconds, setMilliseconds] = useState(0);
@@ -30,6 +30,7 @@ export default function Timer({ startTimer, stopTimer }) {
             return () => clearInterval(interval);
         }
         else if (stopTimer) {
+            timeEnded(`${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}:${milliseconds < 10 ? `0${milliseconds}` : milliseconds}`);
             clearInterval();
         }
     }, [milliseconds, seconds, startTimer, stopTimer]);
